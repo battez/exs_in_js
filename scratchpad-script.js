@@ -141,7 +141,22 @@ findElement([1, 2, 3, 4], num => num % 2 === 0);
 
 function booWho(bool) {
   // What is the new fad diet for ghost developers? The Boolean.
-  return bool;
+  return typeof(bool) === "boolean";
 }
 
 booWho(null);
+
+
+
+function titleCase(str) {
+	
+	let words = str.toLowerCase().split(" ");
+	
+	const result = words.map(
+		word => word.charAt(0).toUpperCase() + word.slice(1)
+	);
+	
+  return result.join(" ");
+}
+
+titleCase("I'm a little tea pot");
