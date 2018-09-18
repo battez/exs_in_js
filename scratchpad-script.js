@@ -107,6 +107,7 @@ repeatStringNumTimes("abc", 3);
 
 
 function truncateString(str, num) {
+	
 	// indicate a string was truncated
 	const more = "...";
 	
@@ -139,6 +140,7 @@ findElement([1, 2, 3, 4], num => num % 2 === 0);
 
 
 function booWho(bool) {
+	
   // What is the new fad diet for ghost developers? The Boolean.
   return typeof(bool) === "boolean";
 }
@@ -161,6 +163,7 @@ function titleCase(str) {
 
 
 function frankenSplice(arr1, arr2, n) {
+	
 	let paste = arr1.slice(0);
   let result = arr2.slice(0);
 	
@@ -202,3 +205,60 @@ function getIndexToIns(arr, num) {
 }
 
 getIndexToIns([40, 60], 50);
+
+/*
+Return true if the string in the first element of the array contains
+all of the letters of the string in the second element of the array.
+*/
+
+function mutation(arr) {
+	
+	let result = true;
+	
+	// split both elements into only letters
+	for (let i = 0; i < arr.length; i++) {
+		
+		const letters = arr[i].toLowerCase().split('');
+		
+		// use Set() to just store unique letters.
+		arr[i] = new Set(letters);
+	}
+
+	// convert the second set element back to an array,
+	// then check its letters are all in the first element supplied.
+	for(let letter of Array.from(arr[1])) {
+		
+		// if this letter is not contained in the first element
+		// we store in result and end the loop
+		if(!(arr[0].has(letter))) {
+			result = false;
+			break;
+		}
+		
+	}
+	
+  return result;
+}
+
+mutation(["hello", "Hey"]);
+
+/*
+Write a function that splits an array (first argument) into groups the length
+of size (second argument) and returns them as a two-dimensional array.
+*/
+function chunkArrayInGroups(arr, size) {
+	
+	//2D array will store the chunks of size:size
+	let chunks = [];
+	
+	// loop thru incrementing by chunk size specified
+  for (let i = 0; i < arr.length; i += size) {
+
+  	const chunk = arr.slice(i, i + size);
+  	chunks.push(chunk);
+  }
+  
+  return chunks;
+}
+
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
