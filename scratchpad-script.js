@@ -159,4 +159,53 @@ function titleCase(str) {
   return result.join(" ");
 }
 
-titleCase("I'm a little tea pot");
+
+
+function frankenSplice(arr1, arr2, n) {
+	let paste = arr1.slice(0);
+	console.log(paste);
+  let result = arr2.slice(0);
+	console.log(result);
+	
+	// modifies in place; use spread operator
+	result.splice(n, 0, ...paste);
+	console.log(result);
+  return result;
+}
+
+frankenSplice([1, 2, 3], [4, 5, 6], 1);
+
+// remove falsy values from input array
+function bouncer(arr) {
+	
+  return arr.filter(elem => elem);
+  
+}
+
+bouncer([7, "ate", "", false, 9]);
+
+// Return the lowest index at which a value (second argument)
+// should be inserted into an array (first argument)
+// once it has been sorted. The returned value should be a number
+function getIndexToIns(arr, num) {
+	
+	// supply a compare fn for ascending numerically:
+	let sorted = arr.sort((a,b) => a - b);
+	console.log(sorted);
+	
+	// where to insert: default to after the last elem.
+	let insertAt = sorted.length;
+	
+  for (let i = 0; i < sorted.length; i++) {
+  	console.log('current',i);
+  	if (sorted[i] >= num) {
+  		insertAt = i;
+  		console.log(insertAt);
+  		break;
+  	}
+  	
+  }
+  return insertAt;
+}
+
+getIndexToIns([40, 60], 50);
