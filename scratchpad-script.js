@@ -20,12 +20,13 @@ reverseString("hello");
 
 
 function factorialize(num) {
+	
+	// invalid
 	if(!Number.isInteger(num) || num < 1) {
-		console.log('invalid...');
 		return 1;
 	}
   else if (num === 1) {
-  	console.log('end state reached..');
+  	// end state reached
   	return 1;
   }
   else {
@@ -59,12 +60,10 @@ function largestOfFour(arr) {
 	// gets the max of that inner array
 	return arr.map( function findMax(singleArray) {
 		
-		console.log('Element:');
 		
 		// this will run on a single array's elements
 		return singleArray.reduce(function(a, b) {
 			
-			console.log('latest max:', Math.max(a, b));
     	return Math.max(a, b);
 		});
 		
@@ -163,13 +162,10 @@ function titleCase(str) {
 
 function frankenSplice(arr1, arr2, n) {
 	let paste = arr1.slice(0);
-	console.log(paste);
   let result = arr2.slice(0);
-	console.log(result);
 	
 	// modifies in place; use spread operator
 	result.splice(n, 0, ...paste);
-	console.log(result);
   return result;
 }
 
@@ -191,16 +187,13 @@ function getIndexToIns(arr, num) {
 	
 	// supply a compare fn for ascending numerically:
 	let sorted = arr.sort((a,b) => a - b);
-	console.log(sorted);
 	
 	// where to insert: default to after the last elem.
 	let insertAt = sorted.length;
 	
   for (let i = 0; i < sorted.length; i++) {
-  	console.log('current',i);
   	if (sorted[i] >= num) {
   		insertAt = i;
-  		console.log(insertAt);
   		break;
   	}
   	
