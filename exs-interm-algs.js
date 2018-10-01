@@ -126,3 +126,39 @@ function whatIsInAName(collection, source) {
   return arr;
 }
 
+
+/*
+
+Convert a string to spinal case. Spinal case is
+all-lowercase-words-joined-by-dashes. spinalCase("This Is Spinal Tap") should
+return "this-is-spinal-tap". spinalCase("thisIsSpinalTap") should return
+"this-is-spinal-tap". spinalCase("The_Andy_Griffith_Show") should return
+"the-andy-griffith-show".
+
+*/
+
+function spinalCase(str) {
+	
+	// Deal with possible camelCaps needing separated first:
+	let re = /([a-z][A-Z])/g;
+	
+	// define a replacer
+	const replacer = function (match) {
+		return match.substr(0, 1) + ' ' + match.substr(1);
+	}
+	
+	// execute the replacement
+	str = str.replace(re, replacer);
+
+	// now do the rest of character swapping to hyphens
+  str = str.toLowerCase();
+  
+  // find characters to swap
+  re = /[\s\.\-_,]+/;
+  
+  const pieces = str.split(re);
+  return pieces.join('-');
+  
+}
+
+spinalCase('This Is Spinal Tap');
