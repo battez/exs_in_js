@@ -1,3 +1,61 @@
+
+/*
+DNA pair all chars in a string
+The DNA strand is missing the pairing element. Take each character, 
+get its pair, and return the results as a 2d array.
+
+Base pairs are a pair of AT and CG. Match the missing element to the 
+provided character.
+
+Return the provided character as the first element in each array.
+
+For example, for the input GCG, return [["G", "C"], ["C","G"],["G", "C"]]
+
+The character and its pair are paired up in an array, and all the arrays are
+ grouped into one encapsulating array.
+*/
+function pairElement(str) {
+	let parts = Array.from(str);
+
+	const getOtherHalf = function(character) {
+		let pair = [];
+		switch (character) {
+		  case 'T':
+		    pair.push(character, 'A');
+		    break;
+		  case 'A':
+		  	pair.push(character, 'T');
+		  	break;
+		  case 'G':
+		  	pair.push(character, 'C');
+		    break;
+
+		  default:
+		  	pair.push(character, 'G');
+		}
+		console.log(pair);
+		return pair;
+	}
+
+	let pairs = parts.map(halfpair => getOtherHalf(halfpair));
+	console.log(pairs);
+  	return pairs;
+}
+
+pairElement("GCG");
+
+
+
+
+
+
+
+
+
+
+
+// ================== 
+
 // sum start and end numbers and all between them.
 // i.e. sumAll([10, 5]) should return 45.
 
@@ -256,3 +314,6 @@ function myReplace(str, before, after) {
 }
 
 myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+
+
+
