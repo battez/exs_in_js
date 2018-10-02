@@ -17,41 +17,64 @@ The character and its pair are paired up in an array, and all the arrays are
 function pairElement(str) {
 	let parts = Array.from(str);
 
+	// mapping of pairs to other half
 	const getOtherHalf = function(character) {
 		let pair = [];
+
 		switch (character) {
 		  case 'T':
 		    pair.push(character, 'A');
 		    break;
+
 		  case 'A':
 		  	pair.push(character, 'T');
 		  	break;
+
 		  case 'G':
 		  	pair.push(character, 'C');
 		    break;
 
 		  default:
+		  	// possibly bit bad practice to set an option here as default!
 		  	pair.push(character, 'G');
 		}
-		console.log(pair);
 		return pair;
 	}
 
 	let pairs = parts.map(halfpair => getOtherHalf(halfpair));
-	console.log(pairs);
   	return pairs;
 }
 
 pairElement("GCG");
 
 
+function fearNotLetter(str) {
 
+	let last = 0;
+	for (var i = 0; i < str.length; i++) {
+		
+		if(i !== 0){
+			if(str.charCodeAt(i) - last === 1) 
+			{
+				last = str.charCodeAt(i);
+				//console.log('i then last',i, last);
+				continue;
+			}
+			else {
+				
+				return String.fromCharCode(last + 1);
+			}
+		} else	{
+			last = str.charCodeAt(i);
+			continue;
+		}
 
+	}
 
+  	return undefined;
+}
 
-
-
-
+fearNotLetter("abce");
 
 
 // ================== 
