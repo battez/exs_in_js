@@ -162,3 +162,51 @@ function spinalCase(str) {
 }
 
 spinalCase('This Is Spinal Tap');
+
+/*
+Translate the provided string to pig latin.
+
+Pig Latin takes the first consonant (or consonant cluster) of an English word, 
+moves it to the end of the word and suffixes an "ay".
+
+
+If a word begins with a vowel you just add "way" to the end.
+
+Input strings are guaranteed to be English words in all lowercase.
+
+translatePigLatin("california") should return "aliforniacay".
+translatePigLatin("paragraphs") should return "aragraphspay".
+translatePigLatin("glove") should return "oveglay".
+translatePigLatin("algorithm") should return "algorithmway".
+translatePigLatin("eight") should return "eightway".
+Should handle words where the first vowel comes in the end of the word.
+Should handle words without vowels.
+*/
+function translatePigLatin(str) {
+
+	const vowels = /[aeiou]/;
+	// edge case where no vowels present
+	if (null === str.match(vowels)) {
+		console.log('no vowels');
+		return str + 'ay';
+
+	} 
+	else {
+		// main swapping for rest of cases:
+		const pattern = /^([^aeiou]+)(.+)/;
+		let result = str.replace(pattern, '$2$1')
+
+		if (result.substr(0,1) !== str.substr(0,1)) {
+			console.log('not vowel start');
+			result += 'ay';
+		}	
+		else {
+			console.log('vowel start');
+			result += 'way';
+		}
+		
+	  	return result;
+	}
+}
+
+translatePigLatin("consonant");
