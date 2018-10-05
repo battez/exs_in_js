@@ -183,15 +183,19 @@ function sumPrimes(num) {
 
 	let primes = [2, 3]; 
 
-	for (let i = 2; i < num; i++) {
+	for (let i = 2; i <= num; i++) {
+
 		// keep track of whether prime. 
 		// At end use to decide to push() or not
 		let prime = true;
-		if((i % 2 !== 0) && (i%3 !== 0)) {
-			for (var j = 5; j < i; j+=2) {
+		
+		if((i % 2 !== 0) && (i % 3 !== 0)) {
+
+			// use another loop to assess divisors
+			for (let j = 5; j < i; j+=2) {
 				if(i % j === 0 ) {
 					prime = false;
-					console.log('i not prime', i);
+					//console.log('i not prime', i);
 					break;
 				}
 
@@ -200,12 +204,12 @@ function sumPrimes(num) {
 		else {
 			prime = false;
 		}
+
 		if(prime) {
 			primes.push(i);
-			console.log(primes);
 		}
 	}
-	console.log(primes);
+	
 	const reducer = (total, value) => total + value;
   	return primes.reduce(reducer);
 }
