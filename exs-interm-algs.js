@@ -240,41 +240,48 @@ smallestCommons([2, 10]) should return 2520.
 smallestCommons([1, 13]) should return 360360.
 smallestCommons([23, 18]) should return 6056820.
 
-NB Slow - but works! Inner loop better if ascending not descending.
+NB A bit slow - but works!
   */
 function smallestCommons(arr) {
 
 	// use only one order to simplify things
 	arr = (arr[0] < arr[1]) ?  arr : arr.reverse();
-	console.log(arr);
 
 	let found = false;
 	let curr = arr[1];
 
 	while (found === false) {
-		curr++;
-		console.log('curr',curr);
+
+		// key to efficiency is increase by largest factor each pass 
+		curr += arr[1];
+		
 
 		// flag to switch off if a remainder from division attempt
-		divisible = true;
+		let divisible = true;
 		for (let i = arr[1]; i >= arr[0]; i--) {
 			
 			if(curr % i !== 0) {
-				console.log('i not divis:', i);
+
 				divisible = false;
+
 				// we need to return to while loop to try a bigger num
 				break;
 			}
 		}
 
 		// if we are still divisible here we made it through inner loop,
-		// this will be our lowest multiple!
-		if(divisible) {
-			found = curr;
+		// this will be our lowest multiple.
+		if(!divisible) {
+			continue;
 		}
-		 
+		else {
+			found = curr;
+			break;
+		}
 	}
+
   	return found;
+		
 }
 
 
