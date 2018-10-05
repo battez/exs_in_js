@@ -106,6 +106,113 @@ function uniteUnique(arr) {
   	return Array.from(result);
 }
 
+/*
+TODO:
+
+
+Convert the characters &, <, >, " (double quote), and ' (apostrophe),
+ in a string to their corresponding HTML entities.
+convertHTML("Dolce & Gabbana") should return Dolce &​amp; Gabbana.
+convertHTML("Hamburgers < Pizza < Tacos") should return Hamburgers &​lt;
+ Pizza &​lt; Tacos.
+convertHTML("Sixty > twelve") should return Sixty &​gt; twelve.
+convertHTML('Stuff in "quotation marks"') should return Stuff in 
+&​quot;quotation marks&​quot;.
+convertHTML("Schindler's List") should return Schindler&​apos;s List.
+*/
+function convertHTML(str) {
+  // &colon;&rpar;
+  return str;
+}
+
+convertHTML("Dolce & Gabbana");
+
+
+
+
+/*
+
+Given a positive integer num, return the sum of all odd Fibonacci numbers 
+that are less than or equal to num.
+
+The first two numbers in the Fibonacci sequence are 1 and 1. Every additional 
+number in the sequence is the sum of the two previous numbers. The first six
+ numbers of the Fibonacci sequence are 1, 1, 2, 3, 5 and 8.
+
+For example, sumFibs(10) should return 10 because all odd Fibonacci numbers 
+less than or equal to 10 are 1, 1, 3, and 5.
+
+*/
+function sumFibs(num) {
+
+	let fibs = [1, 1];
+
+	//generate the Fibonacci number up until parameter given.
+	for (let i = 2; true; i++) {
+
+		const x = fibs[i - 1] + fibs[i - 2];
+		if(x > num) {
+			break;
+		} else {
+			fibs.push(x);
+		}
+		
+	}
+
+	const reducer = (total, value) => total + value;
+	return fibs.filter(fib => (fib % 2) === 1).reduce(reducer);
+  
+}
+
+
+/*
+Sum all the prime numbers up to and including the provided number.
+
+A prime number is defined as a number greater than one and having only 
+two divisors, one and itself. For example, 2 is a prime number because it's 
+only divisible by one and two.
+
+The provided number may not be a prime.
+
+sumPrimes(10) should return a number.
+sumPrimes(10) should return 17.
+sumPrimes(977) should return 73156.
+*/
+
+function sumPrimes(num) {
+
+	let primes = [2, 3]; 
+
+	for (let i = 2; i < num; i++) {
+		// keep track of whether prime. 
+		// At end use to decide to push() or not
+		let prime = true;
+		if((i % 2 !== 0) && (i%3 !== 0)) {
+			for (var j = 5; j < i; j+=2) {
+				if(i % j === 0 ) {
+					prime = false;
+					console.log('i not prime', i);
+					break;
+				}
+
+			}
+		}
+		else {
+			prime = false;
+		}
+		if(prime) {
+			primes.push(i);
+			console.log(primes);
+		}
+	}
+	console.log(primes);
+	const reducer = (total, value) => total + value;
+  	return primes.reduce(reducer);
+}
+
+sumPrimes(10);
+
+
 // ================== 
 
 // sum start and end numbers and all between them.
