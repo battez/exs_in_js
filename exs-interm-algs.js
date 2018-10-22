@@ -55,6 +55,72 @@ function palindrome(str) {
 palindrome("A man, a plan, a canal. Panama");
 
 
+// TODO: unfinished.
+function convertToRoman(num) {
+	
+	// Helper function to manage a single conversion of a digit and
+	// column to roman numeral value string.
+	// Convert a single digit for its column into Roman nums.
+	// NB: below should probably be a partial / curry function
+	// and split columns into arguments
+	function convertDigit(digit, col) {
+		// resulting string value we return as a roman numeral
+		// (we concatenate where necessary, via Roman rules)
+		let value;
+		
+		// look up column by using index of this objects relevant elements
+		let romans = {
+			units:['I','X','C','M'],
+			fives: ['V', 'L', 'D', '']
+		};
+		
+		switch (parseInt(digit)) {
+			case 1:
+			case 2:
+			case 3:
+				// TODO: romans.units >>>
+				//value = string concat.
+				break;
+				
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+				// TODO: romans.fives >>>
+				//value = string concat.
+				break;
+				
+			case 9:
+				// TODO: romans.units >>>
+				//value = string concat.
+				break;
+			
+			default:
+				value = 'default';
+				
+		}
+		return value;
+	}
+  
+  // convert to a string representation first
+  let digits = num.toString();
+  
+  // reverse it to loop through more simply (I think?)
+  digits = digits.split('').reverse();
+  
+	// loop through each digit and convert it according to its column
+  for (let col = 0; col < digits.length; col++) {
+  	
+  	// pass to our conversion function
+  	digits[col] = convertDigit(digits[col], col);
+  }
+  
+	return digits.reverse().join('');
+}
+
+convertToRoman(36);
+
 /*
 See problems here:
  https://learn.freecodecamp.org
