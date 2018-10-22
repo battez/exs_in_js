@@ -1,9 +1,67 @@
-// See problems here:
-// https://learn.freecodecamp.org
-// /javascript-algorithms-and-data-structures
-// /intermediate-algorithm-scripting
+/*
+JavaScript Algorithms and Data Structures Projects
+https://learn.freecodecamp.org/javascript-algorithms-and-data-structures
+/javascript-algorithms-and-data-structures-projects/
+
+*/
 
 /*
+Return true if the given
+string is a palindrome. Otherwise, return false.
+
+A palindrome is a word or sentence that's spelled the same
+way both forward and backward, ignoring punctuation,
+case, and spacing.
+
+Note
+You'll need to remove all non-alphanumeric characters
+(punctuation, spaces and symbols) and turn everything
+into the same case (lower or upper case) in order to check for palindromes.
+
+We'll pass strings with varying formats, such as "racecar",
+"RaceCar", and "race CAR" among others.
+
+We'll also pass strings with special symbols, such as "2A3*3a2",
+"2A3 3a2", and "2_A3*3#A2".
+*/
+function palindrome(str) {
+  
+  // pre-process
+  str = str.toLowerCase();
+  
+  // find unwanted characters and replace
+  const re = /[^a-z\d]+/g;
+	str = str.replace(re, '');
+	
+  // for reversing a string
+  function reverseString(txt) {
+    return txt.split('').reverse().join('');
+	}
+
+	// A question of symmetry:
+  // find length & middle, split and reverse one piece
+  // then check for equality
+  
+	// even if odd length string, this will give us enough to
+	// check two halves are palindromic
+	const half = Math.floor(str.length / 2);
+	
+	const flipped = reverseString(str.substring(str.length - half));
+	
+	return str.substring(0, half) === flipped;
+  
+}
+
+palindrome("A man, a plan, a canal. Panama");
+
+
+/*
+See problems here:
+ https://learn.freecodecamp.org
+ /javascript-algorithms-and-data-structures
+ /intermediate-algorithm-scripting
+
+
 DNA pair all chars in a string
 The DNA strand is missing the pairing element. Take each character,
 get its pair, and return the results as a 2d array.
@@ -341,7 +399,6 @@ function steamrollArray(arr) {
     
   }
 	
-	console.log('result',result);
   return result;
 
 }
@@ -349,15 +406,15 @@ function steamrollArray(arr) {
 
 // Return an English translated sentence of the passed binary string.
 // The binary string will be space separated.
-// use: ;
 function binaryAgent(str) {
 	let result = '';
 	
 	let arr = str.split(' ');
 	
-	result = arr.map(letter => String.fromCharCode(parseInt(letter, 2))).join('');
+	result = arr.map(letter =>
+	String.fromCharCode(parseInt(letter, 2))).join('');
 	
-  return result;
+	return result;
 }
 
 binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 " +
@@ -435,7 +492,6 @@ function addTogether(x, z=0){
 	    	return x + y;
 	    }
       
-    
   	};
 	}
 
@@ -458,6 +514,7 @@ with the object.
 
 */
 let Person = function(firstAndLast) {
+	
 	let fullName;
 	
   // Complete the method below and implement the others similarly
@@ -481,6 +538,7 @@ let Person = function(firstAndLast) {
   };
   
   this.setFullName(firstAndLast);
+  
 };
 
 var bob = new Person('Bob Ross');
@@ -600,8 +658,6 @@ function destroyer(arr) {
 
 // test case returns [1,1]
 destroyer([1, 2, 3, 1, 2, 3], 2, 3);
-
-
 
 
 /* 	Make a function that looks through an array of objects (first argument)
