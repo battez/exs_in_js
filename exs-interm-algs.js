@@ -68,8 +68,8 @@ Return true if the string is a valid US phone number; otherwise return false.
 
 function telephoneCheck(str) {
 	
-	// forcing only paired parenthesis failing some tests - work in progress!
-  const re = /^1?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{4}[\)]?$/;
+	// it passes tests but likely this could be improved.
+  const re = /^1?[\s\-]?(\([0-9]{3}\)|[0-9]{3})[\s\-]?[0-9]{3}[\s\-]?[0-9]{4}[\)]?$/;
   
   return re.test(str);
 }
