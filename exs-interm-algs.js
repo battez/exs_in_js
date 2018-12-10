@@ -5,6 +5,76 @@ https://learn.freecodecamp.org/javascript-algorithms-and-data-structures
 
 */
 
+/* One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
+
+A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places.
+Thus 'A' ↔ 'N', 'B' ↔ 'O' and so on.
+
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.*/
+function rot13(str) { // LBH QVQ VG!
+  const shiftBy = 13;
+  const startAlphabet = 65;
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+  	const current = str.charCodeAt(i);
+  	
+  	// check if in A-Z range:
+  	if (current >= startAlphabet ) {
+  		
+  		// if in second half alphabet, deduct the shiftBy amount
+  		if (current >= startAlphabet + shiftBy) {
+  			result += String.fromCharCode(current - shiftBy);
+  		}
+  		else {
+  			result += String.fromCharCode(current + shiftBy);
+  		}
+  	
+  	}
+  	else {
+  		// we just disregard these cases:
+  		result += str.charAt(i);
+  	}
+  	
+  }
+
+  return result;
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");
+
+/*
+Return true if the passed string looks like a valid US phone number.
+
+The user may fill out the form field any way they choose as long as it
+has the format of a valid US number. The following are examples of
+valid formats for US numbers (refer to the tests below for other variants):
+
+555-555-5555
+(555)555-5555
+(555) 555-5555
+555 555 5555
+5555555555
+1 555 555 5555
+For this challenge you will be presented with a string such as
+800-692-7753 or 8oo-six427676;laskdjf. Your job is to validate or
+reject the US phone number based on any combination of the formats
+provided above. The area code is required. If the country code is provided,
+you must confirm that the country code is 1.
+Return true if the string is a valid US phone number; otherwise return false.
+*/
+
+function telephoneCheck(str) {
+	
+	// forcing only paired parenthesis failing some tests - work in progress!
+  const re = /^1?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{4}[\)]?$/;
+  
+  return re.test(str);
+}
+
+//USAGE: telephoneCheck("555-555-5555");
 /*
 Return true if the given
 string is a palindrome. Otherwise, return false.
@@ -120,6 +190,30 @@ function convertToRoman(num) {
 }
 
 convertToRoman(36);
+
+/*
+ draft solution for Cipher ROT13
+ One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
+
+A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus 'A' ↔ 'N', 'B' ↔ 'O' and so on.
+
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+
+All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
+*/
+function rot13(str) { // LBH QVQ VG!
+  
+  // RegEx replacer callback
+  // const n = 13
+  // x = x-n etc (n pos-neg sign adjust of course)
+  // return String.fromCharCode()
+  return str;
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");
+
 
 /*
 See problems here:
