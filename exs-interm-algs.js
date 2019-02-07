@@ -5,6 +5,119 @@ https://learn.freecodecamp.org/javascript-algorithms-and-data-structures
 
 */
 
+
+/*
+Design a cash register drawer function checkCashRegister() that
+accepts purchase price as the first argument (price), payment as
+the second argument (cash), and cash-in-drawer (cid) as the third argument.
+
+cid is a 2D array listing available currency.
+
+The checkCashRegister() function should always return an object
+with a status key and a change key.
+
+Return {status: "INSUFFICIENT_FUNDS", change: []} if cash-in-drawer
+is less than the change due, or if you cannot return the exact change.
+
+Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value
+for the key change if it is equal to the change due.
+
+Otherwise, return {status: "OPEN", change: [...]}, with the change due
+in coins and bills, sorted in highest to lowest order,
+as the value of the change key.
+
+*/
+function mySelectSort(arr) {
+	
+	for (let i = 0; i < arr.length - 1; i++) {
+		
+		let indexMin = i;
+		
+		for (let j = i+1; j < arr.length; j++) {
+			
+			if (arr[j] < arr[indexMin]) {
+				indexMin = j;
+			}
+		}
+		
+		// do swap of indexMin element and i
+		let temp = arr[indexMin];
+		arr[indexMin] = arr[i];
+		arr[i] = temp;
+		
+	}
+	console.log(arr);
+	return arr;
+}
+mySelectSort([1,3,2,2,90,5,1,4]);
+
+function checkCashRegister(price, cash, cid) {
+  let change = [];
+  
+  //lookup denomination values stored here, in order:
+  const units = [["PENNY", 0.01], ["NICKEL", 0.05], ["DIME", 0.10],
+    ["QUARTER", 0.25], ["ONE", 1], ["FIVE", 5],
+    ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED", 100]];
+    
+  units.reverse();
+  cid.reverse();
+  
+  // how much do we need to give back?
+  let remaining = cash - price;
+  console.log('due', remaining);
+  
+  for (let i = 0; i < units.length; i++) {
+  	if (units[i][1] > remaining) {
+  		console.log('unit too big');
+  		continue;
+  	}
+  	else {
+  		if (remaining === 0) {
+  				break;
+  		}
+  			
+  		let unitAmount = 0.0;
+  		console.log('cid', cid[i][1]);
+  		// use the current unit amount to set the increment of this loop:
+  		// FIXME: the less than equal to -- if zero in cid? And if unset?
+  		for (let j = 0; j <= cid[i][1]; j += units[i][1]) {
+  			// decrement remaining
+  			remaining -= units[i][1];
+  			
+  			// update change
+  			unitAmount += units[i][1];
+  			console.log(unitAmount);
+  			
+  			if (remaining === 0) {
+  				break;
+  			}
+  		}
+  		change.push([units[i][0], unitAmount]);
+  		console.log(change);
+  		continue;
+  	}
+  }
+  
+  // an object with a status key and a change key.
+  console.log('change', change);
+  return change;
+}
+
+// Example cash-in-drawer array:
+// [["PENNY", 1.01],
+// ["NICKEL", 2.05],
+// ["DIME", 3.1],
+// ["QUARTER", 4.25],
+// ["ONE", 90],
+// ["FIVE", 55],
+// ["TEN", 20],
+// ["TWENTY", 60],
+// ["ONE HUNDRED", 100]]
+
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+
+
 /* One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
 
 A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places.
