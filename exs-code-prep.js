@@ -42,7 +42,7 @@ Compare and update the inventory stored in a 2D array against a second 2D array 
 */
 function updateInventory(arr1, arr2) {
     
-    // convert existing inventory to a Map
+    // convert existing inventory to a Map, swap the elemtn order before doing so
     let existing = new Map(arr1.map(x => x.reverse()));
     
     // iterate the update and adjust the existing inventory
