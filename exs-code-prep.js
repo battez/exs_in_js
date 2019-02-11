@@ -148,3 +148,43 @@ function pairwise(arr, arg) {
 }
 
 pairwise([1,4,2,3,0,5], 7);
+
+
+function bubbleSort(arr) {
+	
+	// record how many swaps we make on each pass. Stop condition will be 0.
+	let changes;
+	
+	for (var i = 0; i < arr.length; i++) {
+		  changes = 0;
+		  
+		  // store the swapping value
+		  let temp;
+		  
+		  for (var j = 0; j < arr.length; j++) {
+				
+		  	if (arr[j] > arr[j+1]) {
+		  		temp = arr[j];
+		  		arr[j] = arr[j+1];
+		  		arr[j+1] = temp;
+		  		changes ++;
+		  		//console.log(arr);
+		  		//console.log('changes',changes);
+		  		continue;
+		  	}
+		  	
+		  }
+		  
+		// check if this loop still needs to run:
+		if(!changes) {
+  		break;
+  	}
+	}
+	
+	console.log(arr);
+  return arr;
+}
+
+// test array:
+//bubbleSort([2,1,5,-3]);
+bubbleSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
