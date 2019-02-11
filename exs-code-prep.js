@@ -150,6 +150,7 @@ function pairwise(arr, arg) {
 pairwise([1,4,2,3,0,5], 7);
 
 
+// sort an array of integers in ascending order
 function bubbleSort(arr) {
 	
 	// record how many swaps we make on each pass. Stop condition will be 0.
@@ -165,20 +166,18 @@ function bubbleSort(arr) {
 		  
 		  for (var j = 0; j < arr.length; j++) {
 				
+				// make a swap if necessary
 		  	if (arr[j] > arr[j+1]) {
 		  		temp = arr[j];
 		  		arr[j] = arr[j+1];
 		  		arr[j+1] = temp;
 		  		changes ++;
-		  		
-		  		continue;
 		  	}
 		  	
 		  }
   	
 	}
 	
-	console.log(arr);
   return arr;
 }
 
