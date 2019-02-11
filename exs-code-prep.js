@@ -86,3 +86,5 @@ const newInv = [
 ];
 
 updateInventory(curInv, newInv);
+
+
