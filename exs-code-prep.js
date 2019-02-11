@@ -155,7 +155,9 @@ function bubbleSort(arr) {
 	// record how many swaps we make on each pass. Stop condition will be 0.
 	let changes;
 	
-	for (var i = 0; i < arr.length; i++) {
+	while (changes !== 0) {
+		
+			// reset to 0 each time
 		  changes = 0;
 		  
 		  // store the swapping value
@@ -168,17 +170,12 @@ function bubbleSort(arr) {
 		  		arr[j] = arr[j+1];
 		  		arr[j+1] = temp;
 		  		changes ++;
-		  		//console.log(arr);
-		  		//console.log('changes',changes);
+		  		
 		  		continue;
 		  	}
 		  	
 		  }
-		  
-		// check if this loop still needs to run:
-		if(!changes) {
-  		break;
-  	}
+  	
 	}
 	
 	console.log(arr);
