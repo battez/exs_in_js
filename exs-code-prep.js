@@ -28,9 +28,9 @@ function sym(args) {
   		}
   	}
   }
-  result = result.sort();
-  // console.log('result', result);
-  return result;
+  
+  return result.sort();
+  
 }
 
 sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
@@ -87,4 +87,64 @@ const newInv = [
 
 updateInventory(curInv, newInv);
 
+function permAlone(str) {
+	let count = 0;
+	
+	// if all unique then n! permutations.
+	// NB not sure there is a formula though for this :/
+	// Recursion seems appropriate as we are wanting to
+	// repeatedly go through and run a check, count, until nothing left.
+	
+  return str;
+}
 
+permAlone('aab');
+
+/*
+Algorithms: Pairwise
+Given an array arr,
+find element pairs whose sum equal the second argument arg
+and return the sum of their indices.
+*/
+function pairwise(arr, arg) {
+	
+	// store indexes we use in here, so we can check against them
+	let used = new Set();
+	
+	// go through the initial array and look for pairs in inner loop
+	for (let i = 0; i < arr.length; i++) {
+	
+		if(used.has(i)) {
+				continue;
+		}
+		
+		for (let j = i + 1; j < arr.length; j++) {
+			
+			if(used.has(j)) {
+				continue;
+			}
+			
+			// check for a solution
+			if (arr[i] + arr[j] === arg) {
+				used.add(i).add(j);
+				//console.log('used is now',used);
+				
+				// move on...
+				break;
+			}
+			
+		}
+		
+	}
+	
+	// sum used as the answer
+	const result = Array.from(used);
+	if (result.length) {
+		return result.reduce((total, current) => total + current);
+	} else {
+  	return 0;
+	}
+	
+}
+
+pairwise([1,4,2,3,0,5], 7);
