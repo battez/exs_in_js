@@ -164,7 +164,7 @@ function bubbleSort(arr) {
 		  // store the swapping value
 		  let temp;
 		  
-		  for (var j = 0; j < arr.length; j++) {
+		  for (var j = 0; j < arr.length - 1; j++) {
 				
 				// make a swap if necessary
 		  	if (arr[j] > arr[j+1]) {
