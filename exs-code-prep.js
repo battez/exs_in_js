@@ -184,3 +184,61 @@ function bubbleSort(arr) {
 // test array:
 //bubbleSort([2,1,5,-3]);
 bubbleSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
+
+/* trying Codewars exercises
+
+
+Create a function that returns the sum of the two lowest positive numbers
+given an array of minimum 4 integers. No floats or empty arrays will be passed.
+
+For example, when an array is passed like [19, 5, 42, 2, 77], the output should be 7.
+
+[10, 343445353, 3453445, 3453545353453] should return 3453455.
+
+[10,9,2,8,6]
+*/
+function sumTwoSmallestNumbers(numbers)	{
+	numbers.sort((a, b) =>  a - b);
+	
+	for (let i = 0; i < numbers.length; i++) {
+		
+		// in case there were negative integers in the sorted array
+		// we only return the sum of two lowest pos. integers:
+		if (numbers[i] > 0) {
+			return numbers[i] + numbers[i+1];
+		}
+	}
+}
+// console.log(sumLowestTwoPos([10,-2,9,2,8,6,-3,-1]));
+
+String.prototype.upperFirstLetters = function () {
+	
+	function upperFirst(word) {
+		return word.substring(0,1).toUpperCase() + word.substring(1);
+	}
+	
+	return this.split(' ').map((x) => upperFirst(x)).join(' ');
+}
+
+/*Given an array, find the int that appears an odd number of times.
+
+There will always be only one integer that appears an odd number of times.*/
+
+function oddInt(arr){
+	
+	let heaps = new Map();
+	
+	for (let i = 0; i < arr.length; i++) {
+		
+		
+		if(heaps.has(arr[i])) {
+			// hopefully it is efficient to delete a key
+			heaps.delete(arr[i]);
+		} else {
+			heaps.set(arr[i], true);
+		}
+		
+	}
+	return heaps.keys().next().value;
+	
+}
