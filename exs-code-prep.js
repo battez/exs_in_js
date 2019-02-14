@@ -224,21 +224,91 @@ String.prototype.upperFirstLetters = function () {
 
 There will always be only one integer that appears an odd number of times.*/
 
-function oddInt(arr){
+function findOdd(arr){
 	
 	let heaps = new Map();
 	
 	for (let i = 0; i < arr.length; i++) {
 		
-		
 		if(heaps.has(arr[i])) {
+			
 			// hopefully it is efficient to delete a key
 			heaps.delete(arr[i]);
+			
 		} else {
 			heaps.set(arr[i], true);
 		}
 		
 	}
+	
 	return heaps.keys().next().value;
 	
 }
+
+/*Implement a function that adds two numbers together and returns
+their sum in binary. The conversion can be done before, or after
+the addition.
+
+The binary number returned should be a string.*/
+function addBinary(a, b) {
+	let result = a + b;
+	return result.toString(2);
+
+}
+addBinary(3, 8);
+
+/*
+bus stops, left is on right is off in array of tuples.
+*/
+let number = function(busStops){
+	const reducer = (accumulator, currentValue) => accumulator + currentValue;
+	
+  return busStops.map((x) => x[0] - x[1]).reduce(reducer);
+  
+}
+console.log(number([[10,0],[3,5],[5,8]]));
+
+
+/*
+
+You are going to be given an array of integers.
+
+Your job is to take that array and find an index N where
+the sum of the integers to the left of N is equal to the
+sum of the integers to the right of N.
+
+If there is no index that would make this happen, return -1.
+[1,0,1]
+
+*/
+function findEvenIndex(arr)
+{
+	// store totals for left and right parts of the array
+  let left;
+  let right;
+ 
+  if(!arr.length) {
+  	return 0;
+  }
+  else {
+  	  for (let i = 0; i < arr.length; i++) {
+  	  	
+  	  	// the two sliced parts of the array
+  	  	leftItems = arr.slice(0, i);
+  			rightItems = arr.slice(i+1);
+  			
+  			left = leftItems.reduce((a, cV) => a + cV, 0);
+  			right = rightItems.reduce((a, cV) => a + cV, 0);
+  			
+  			if (left === right) {
+  				return i;
+  			}
+  		}
+  		
+  		// no index found? Then:
+  		return -1;
+  }
+
+}
+
+
