@@ -184,3 +184,47 @@ function bubbleSort(arr) {
 // test array:
 //bubbleSort([2,1,5,-3]);
 bubbleSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
+
+/*
+The maximum sum subarray problem consists
+in finding the maximum sum of a contiguous subsequence
+in an array or list of integers:
+
+
+Easy case is when the list is made up of only
+positive numbers and the maximum sum is the sum of the whole
+array. If the list is made up of only negative numbers,
+return 0 instead.
+
+Empty list is considered to have zero greatest sum.
+
+Note that the empty list or array is also a valid sublist/subarray.
+*/
+
+let maxSequence = function(arr){
+  let maxValue = 0;
+  let currentTotal = 0;
+  
+  // nested loop should give us exhaustive way to get maximum:
+  for (let i = 0; i < arr.length; i++) {
+  	
+  	for (let j = i + 1; j <= arr.length; j++) {
+  		
+  		currentTotal = arr.slice(i, j).reduce((a, b) => a + b);
+  		// console.log(arr.slice(i, j));
+  		// console.log('gives temp:', currentTotal);
+  		
+  		if (currentTotal > maxValue) {
+  			maxValue = currentTotal;
+  		}
+  	}
+  }
+  return maxValue;
+}
+console.log('=20',maxSequence([-2, 1, 0,-4, 20]));
+
+console.log('=6',maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+console.log('=238',maxSequence([2,-18,19,-20,25,-22,-7,-25,-39,31,-38,-6,10,-15,31,-10,48,3,-45,-19,-23,4,32,27,-29,4,36,44,9,46,-27,-42,-42,-22,15,43,-26,21,37,27,9,-42,9,-36,-4,-18,27,-33,-18,-21,45,34,4,37,7,2,26,22,-47,-15,49,-20,37,27,-13,-29,24,-18,-14]));
+console.log('=50',maxSequence([50,-16,-15,-24,-5,22]));
+console.log('=202',maxSequence( [31,30,-5,-38,48,46,38,-35,49,22,-8,22,-27,-17,12,34,-31]));
+console.log('=300',maxSequence( [-9,47,1,15,-21,32,-25,36,49,-11,15,25,13,15,5,34,-22,38,-22,40,36,-19,6,-5,-21,-45,-10,-19,36,22,-1,-37,1,-25,-35,-31,49]));
