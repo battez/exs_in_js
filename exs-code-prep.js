@@ -349,3 +349,23 @@ let maxSequence = function(arr){
   return maxValue;
 }
 // TEST console.log('=20',maxSequence([-2, 1, 0,-4, 20]));
+
+let uniqueInOrder = function(iterable){
+  // iterable can be a string or an array
+  let temp, uniques = [];
+  
+  for (const item of iterable) {
+  	if (temp === item) {
+  		continue;
+  	}
+  	else {
+  		temp = item;
+  		uniques.push(item);
+  	}
+	}
+	return uniques;
+}
+console.log(uniqueInOrder('AAAABBBCCDAABBB'));// == ['A', 'B', 'C', 'D', 'A', 'B']
+console.log(uniqueInOrder('ABBCcAD'));//['A', 'B', 'C', 'c', 'A', 'D']
+console.log(uniqueInOrder([1,2,2,3,3]));//[1,2,3]
+
