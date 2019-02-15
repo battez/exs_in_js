@@ -365,7 +365,80 @@ let uniqueInOrder = function(iterable){
 	}
 	return uniques;
 }
-console.log(uniqueInOrder('AAAABBBCCDAABBB'));// == ['A', 'B', 'C', 'D', 'A', 'B']
+/*TESTS console.log(uniqueInOrder('AAAABBBCCDAABBB'));// == ['A', 'B', 'C', 'D', 'A', 'B']
 console.log(uniqueInOrder('ABBCcAD'));//['A', 'B', 'C', 'c', 'A', 'D']
-console.log(uniqueInOrder([1,2,2,3,3]));//[1,2,3]
+console.log(uniqueInOrder([1,2,2,3,3]));//[1,2,3]*/
 
+/*
+There is a queue for the self-checkout tills at the supermarket.
+Your task is write a function to calculate the total time required
+for all the customers to check out!
+
+The function has two input variables:
+
+customers: an array (list in python) of positive integers
+representing the queue. Each integer represents a customer,
+and its value is the amount of time they require to check out.
+n: a positive integer, the number of checkout tills.
+The function should return an integer, the total time required.
+
+EDIT: A lot of people have been confused in the comments.
+To try to prevent any more confusion:
+
+There is only ONE queue, and
+The order of the queue NEVER changes, and
+Assume that the front person in the queue (i.e. the first
+element in the array/list) proceeds to a till as soon as it
+becomes free.
+*/
+function queueTime(customers, n) {
+	
+  let time = 0;
+  
+  // make an array of arrays to act as the checkout tills & a totals holder
+  let tills = [];
+  let tillTotals = [];
+  
+	for (let i = 0; i < n; i++ ) {
+	    tills[i] = [];
+	}
+	
+	
+  // Work through the queue, to assign to tills.
+  // Then find time = max summed till.
+  for (let i = 0; i < customers.length; i++) {
+
+  	const val = customers[i];
+  	// initially fill up empty tills
+  	if(i < n) {
+  		tills[i % n].push(val);
+  		tillTotals[i % n] = val;
+  	}
+  	else {
+  		// find smallest tillTotal and add this current queue item to that till
+  		// ..and update the tillTotal
+  		// fn: get the index of the min. value of an array
+			const index = tillTotals.indexOf(Math.min(...tillTotals));
+  
+  		//const index = indexOfMinValue(tillTotals);
+  		tills[index].push(val);
+  		tillTotals[index] += val;
+  	}
+		
+  }
+  
+  // sum up each array in tills and return max:
+  let current = 0;
+  for(const till of tills) {
+  	if(!till.length) {
+  		continue;
+  	}
+  	current = till.reduce((a,b) => a + b);
+  	if (time < current) {
+  		time = current;
+  	}
+  }
+  
+  return time;
+  
+}
