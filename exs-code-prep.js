@@ -382,9 +382,6 @@ and its value is the amount of time they require to check out.
 n: a positive integer, the number of checkout tills.
 The function should return an integer, the total time required.
 
-EDIT: A lot of people have been confused in the comments.
-To try to prevent any more confusion:
-
 There is only ONE queue, and
 The order of the queue NEVER changes, and
 Assume that the front person in the queue (i.e. the first
@@ -393,8 +390,9 @@ becomes free.
 */
 function queueTime(customers, n) {
 	
-  let time = 0;
-  
+	if(!customers.length) {
+		return 0;
+	}
   // make an array of arrays to act as the checkout tills & a totals holder
   let tills = [];
   let tillTotals = [];
@@ -408,36 +406,27 @@ function queueTime(customers, n) {
   // Then find time = max summed till.
   for (let i = 0; i < customers.length; i++) {
 
-  	const val = customers[i];
+  	const current = customers[i];
+  	
   	// initially fill up empty tills
   	if(i < n) {
-  		tills[i % n].push(val);
-  		tillTotals[i % n] = val;
+  		tills[i % n].push(current);
+  		tillTotals[i % n] = current;
   	}
   	else {
-  		// find smallest tillTotal and add this current queue item to that till
-  		// ..and update the tillTotal
+  		// find smallest tillTotal, add this current queue item to that,
+  		// then update the tillTotal
   		// fn: get the index of the min. value of an array
 			const index = tillTotals.indexOf(Math.min(...tillTotals));
   
-  		//const index = indexOfMinValue(tillTotals);
-  		tills[index].push(val);
-  		tillTotals[index] += val;
+  		tills[index].push(current);
+  		tillTotals[index] += current;
   	}
 		
   }
   
-  // sum up each array in tills and return max:
-  let current = 0;
-  for(const till of tills) {
-  	if(!till.length) {
-  		continue;
-  	}
-  	current = till.reduce((a,b) => a + b);
-  	if (time < current) {
-  		time = current;
-  	}
-  }
+  // return max amount of time that will be needed for all customers to be done:
+  const time = Math.max(...tillTotals);
   
   return time;
   
