@@ -38,7 +38,11 @@ sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
 /*
 
 Algorithms: Inventory Update
-Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing inventory item quantities (in arr1). If an item cannot be found, add the new item and quantity into the inventory array. The returned inventory array should be in alphabetical order by item.
+Compare and update the inventory stored in a 2D array against a
+second 2D array of a fresh delivery. Update the current existing inventory item
+quantities (in arr1). If an item cannot be found, add the new item and quantity into
+the inventory array. The returned inventory array should be in alphabetical
+order by item.
 */
 function updateInventory(arr1, arr2) {
     
@@ -505,9 +509,59 @@ with the same multiplicities.
 "Same" means, here, that the elements in b are the elements in a squared,
 regardless of the order.*/
 
+function compSimple() {
+	// sort both
+	
+	// square first using map check equals b
+	// stringify both to compare.
+}
+
+// alt. version
+function comp(array1, array2){
+	
+	// simple check
+	if (!Array.isArray(array1) || !Array.isArray(array2) || (array1.length !== array2.length))  {
+		
+		return false;
+
+	}
+	
+	// loop through first array, square value
+	// then find in array2 and unset or break if not found.
+	for (var i = 0; i < array1.length; i++) {
+		
+		const x = array1[i] * array1[i];
+		let found = false;
+		
+		for (var j = 0; j < array2.length; j++) {
+			if (array2[j] === x) {
+				array2.splice(j, 1);
+				found = true;
+				break;
+			}
+		}
+		
+		if (!found) {
+			return false;
+		}
+	}
+	
+	// if we get this far it must be true:
+	return true;
+
+}
+
 // tests
 a = [121, 144, 19, 161, 19, 144, 19, 11]
 b = [121, 14641, 20736, 361, 25921, 361, 20736, 361]// same
+console.log(comp(a, b));
 
 a = [121, 144, 19, 161, 19, 144, 19, 11]
 b = [132, 14641, 20736, 361, 25921, 361, 20736, 361] // fail
+
+	
+// another version - filter multiple times from set of
+// first array and length of filter results must equal length
+function compFilter(a, b){
+	
+}
