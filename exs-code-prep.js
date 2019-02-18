@@ -627,11 +627,26 @@ Ingredients that are not present in the objects, can be considered as 0.
 */
 function cakes(recipe, available) {
   
+  let possibleAmounts = [];
+  	
   // loop through keys recipe
+  for (let key in recipe) {
+  	if(recipe.hasOwnProperty(key)) {
+  		if (key in available) {
+			
+				// divide available by recipe amount to find minimum rounded down
+				possibleAmounts.push(Math.floor(available[key] / recipe[key]));
+				
+			}
+			else {
+				// if missing key in available ingredients return 0
+				return 0;
+			}
+  	}
+		
+	}
   
-  // if missing key in available ingredients return 0
-  
-  // divide available by recipe amount to find minimum rounded down
+  return Math.min(...possibleAmounts);
   
 }
 
