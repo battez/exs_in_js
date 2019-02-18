@@ -565,3 +565,81 @@ b = [132, 14641, 20736, 361, 25921, 361, 20736, 361] // fail
 function compFilter(a, b){
 	
 }
+
+/*
+Given two arrays of strings a1 and a2 return a sorted array r
+in *lexicographical order* of the strings of a1 which are substrings
+of strings of a2.
+
+Note: after looking at others solutions, this could be much simpler using
+array.some() and for the substring part, using string.indexOf()
+
+Or convert to a string using join().
+
+*/
+
+// A solution without recourse to regex:
+function inArray(array1, array2) {
+  
+  // this provides a filter we can use on the first array
+  function isIn(str, words=[]) {
+  	
+  	let found = false;
+  	
+  	for (let i = 0; i < words.length; i++) {
+  		
+  		const word = words[i];
+  		
+  		for (let j = 0; j <= (word.length - str.length); j++) {
+				if(str === word.substring(j, j+str.length))
+				{
+					found = true;
+					break;
+				}
+			}
+			
+			if(found) {
+				break;
+			}
+  	}
+			
+  		
+  	return found;
+  
+  }
+  
+  return array1.filter(sub => isIn(sub, array2)).sort();
+}
+
+// tests
+a1 = ["xyz", "live", "strong"];
+a2 = ["lively", "alive", "harp", "sharp", "armstrong"]; // live strong
+console.log(inArray(a1, a2));
+
+
+/*
+
+Write a function cakes(), which takes the recipe (object) and the available
+ingredients (also an object) and returns the maximum number of cakes Pete
+can bake (integer). For simplicity there are no units for the amounts
+(e.g. 1 lb of flour or 200 g of sugar are simply 1 or 200).
+Ingredients that are not present in the objects, can be considered as 0.
+*/
+function cakes(recipe, available) {
+  
+  // loop through keys recipe
+  
+  // if missing key in available ingredients return 0
+  
+  // divide available by recipe amount to find minimum rounded down
+  
+}
+
+// must return 2
+cakes({flour: 500, sugar: 200, eggs: 1},
+{flour: 1200, sugar: 1200, eggs: 5, milk: 200});
+// must return 0
+cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100},
+{sugar: 500, flour: 2000, milk: 2000});
+
+
