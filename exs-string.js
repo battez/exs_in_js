@@ -21,7 +21,7 @@ function domainName(url){
     
     // if substring 0,4 is www. remove
     if(pieces[0].substring(0,4) === 'www.' ) {
-        console.log('Www');
+
         pieces[0] = pieces[0].substring(4);
     }
     
@@ -31,6 +31,7 @@ function domainName(url){
     
 }
 
-domainName("http://github.com/carbonfive/raygun");// == "github"
+//tests
+/*domainName("http://github.com/carbonfive/raygun");// == "github"
 domainName("http://www.zombie-bites.com"); // == "zombie-bites"
-domainName("https://www.cnet.com"); //== "cnet"
+domainName("https://www.cnet.com"); //== "cnet"*/
