@@ -657,4 +657,87 @@ cakes({flour: 500, sugar: 200, eggs: 1},
 cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100},
 {sugar: 500, flour: 2000, milk: 2000});
 
+/*
+Given an array of positive or negative integers
 
+I= [i1,..,in]
+
+you have to produce a sorted array P of the form
+
+[ [p, sum of all ij of I for which p is a prime factor (p positive) of ij] ...]
+
+P will be sorted by increasing order of the prime numbers.
+The final result has to be given as an array of arrays.
+
+Example:
+
+I = [12, 15]; //result = [[2, 12], [3, 27], [5, 15]]
+[2, 3, 5] is the list of all prime factors of the elements of I, hence the result.
+
+Notes:
+
+It can happen that a sum is 0 if some numbers are negative!
+*/
+function factors(num)
+{
+ var
+  n_factors = [],
+  i;
+ 
+ for (i = 1; i <= Math.floor(Math.sqrt(num)); i += 1)
+  if (num % i === 0)
+  {
+   n_factors.push(i);
+   if (num / i !== i)
+    n_factors.push(num / i);
+  }
+ n_factors.sort(function(a, b){return a - b;});  // numeric sort
+ return n_factors;
+}
+
+function sumOfDivided(intArr=[12, 15]) {
+  
+  // find factors first
+  function findFactors(num){
+  	
+  	let factors = [];
+  	
+  	for (let i = 1; i <= Math.floor(Math.sqrt(num)); i++) {
+  		
+  		// to check if is a factor:
+  		if(num % i === 0) {
+  			factors.push(i);
+  			
+  			// having found one factor, check for its complement
+  			if(num / i !== i) {
+  				factors.push(num / i);
+  			}
+  		}
+  		
+  		
+  	}
+  	
+  	return factors;
+  }
+  
+  let result = [];
+  
+  for (let i = 0; i < intArr.length; i++) {
+  	
+  	allFactors = findFactors(intArr[i]);
+  	
+  	// check which factors are primes
+  	if(true) {
+  		result.push([fac, intArr[i]]);
+  	}
+  	
+  }
+  
+  
+  
+  
+  return result;
+  
+  //return [[2, 12]];
+}
+ 
