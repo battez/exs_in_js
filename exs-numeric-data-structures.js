@@ -5,12 +5,22 @@ Overlapping intervals should only be counted once.*/
 
 function sumIntervals(intervals){
 
-    // get min and max and fill an array with false for this length
+    // get max. and fill an array with 0 for this length
+    // concat the elements of intervals first of all into a flat array:
+    let arr = [].concat.apply([], intervals); // interestingly can do this with push() instead of concat().
+
+    // try with just maximum for length:
+    let result = Array(Math.max(...arr)).fill(0);
     
-    // set this array to true for values from the intervals
+    // set this array to 1 for values from the intervals
+    for (let interval of intervals) {
+        for (let j = interval[0]; j < interval[1]; j++) {
+            result[j] = 1;
+        }
+    }
     
-    // filter for true then return the length of the result
-    
+    // return the reduce sum of the result
+    return result.reduce((a, b) => a + b);
 }
 // tests
 sumIntervals( [
