@@ -7,30 +7,29 @@ function sym(args) {
 	// so it is just an array of unique values:
 	let unique = a => [...new Set(a)];
 	for (let arg = 0; arg < arguments.length; arg++) {
-		args[arg] = unique(arguments[arg]);
+	    args[arg] = unique(arguments[arg]);
 	}
-	
+
 	// start with initial array and then compare each in turn with that.
-  let result = args[0];
-  for (let i = 1; i < args.length; i++) {
-  	
-  	let current = args[i];
-  	
-  	for (let j = 0; j < current.length; j++) {
-  		let value = current[j];
-  		if (result.includes(value)) {
-  			// remove value if already in
-  			result = result.filter(x => x !== value);
-  		}
-  		else {
-  			// add to result
-  			result.push(value);
-  		}
-  	}
-  }
-  
-  return result.sort();
-  
+	let result = args[0];
+	for (let i = 1; i < args.length; i++) {
+
+	    let current = args[i];
+
+	    for (let j = 0; j < current.length; j++) {
+	        let value = current[j];
+	        if (result.includes(value)) {
+	            // remove value if already in
+	            result = result.filter(x => x !== value);
+	        }
+	        else {
+	            // add to result
+	            result.push(value);
+	        }
+	    }
+	}
+
+	return result.sort();
 }
 
 sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
@@ -421,7 +420,7 @@ function queueTime(customers, n) {
   		// find smallest tillTotal, add this current queue item to that,
   		// then update the tillTotal
   		// fn: get the index of the min. value of an array
-			const index = tillTotals.indexOf(Math.min(...tillTotals));
+		const index = tillTotals.indexOf(Math.min(...tillTotals));
   
   		tills[index].push(current);
   		tillTotals[index] += current;
@@ -562,6 +561,7 @@ b = [132, 14641, 20736, 361, 25921, 361, 20736, 361] // fail
 	
 // another version - filter multiple times from set of
 // first array and length of filter results must equal length
+// TODO: attempt this alternate version
 function compFilter(a, b){
 	
 }
@@ -582,30 +582,29 @@ Or convert to a string using join().
 function inArray(array1, array2) {
   
   // this provides a filter we can use on the first array
-  function isIn(str, words=[]) {
-  	
-  	let found = false;
-  	
-  	for (let i = 0; i < words.length; i++) {
-  		
-  		const word = words[i];
-  		
-  		for (let j = 0; j <= (word.length - str.length); j++) {
-				if(str === word.substring(j, j+str.length))
-				{
-					found = true;
-					break;
-				}
-			}
-			
-			if(found) {
-				break;
-			}
-  	}
-			
-  		
-  	return found;
-  
+  function isIn(str, words = []) {
+
+      let found = false;
+
+      for (let i = 0; i < words.length; i++) {
+
+          const word = words[i];
+
+          for (let j = 0; j <= (word.length - str.length); j++) {
+              if (str === word.substring(j, j + str.length)) {
+                  found = true;
+                  break;
+              }
+          }
+
+          if (found) {
+              break;
+          }
+      }
+
+
+      return found;
+
   }
   
   return array1.filter(sub => isIn(sub, array2)).sort();
@@ -631,20 +630,20 @@ function cakes(recipe, available) {
   	
   // loop through keys recipe
   for (let key in recipe) {
-  	if(recipe.hasOwnProperty(key)) {
-  		if (key in available) {
-			
-				// divide available by recipe amount to find minimum rounded down
-				possibleAmounts.push(Math.floor(available[key] / recipe[key]));
-				
-			}
-			else {
-				// if missing key in available ingredients return 0
-				return 0;
-			}
-  	}
-		
-	}
+      if (recipe.hasOwnProperty(key)) {
+          if (key in available) {
+
+              // divide available by recipe amount to find minimum rounded down
+              possibleAmounts.push(Math.floor(available[key] / recipe[key]));
+
+          }
+          else {
+              // if missing key in available ingredients return 0
+              return 0;
+          }
+      }
+
+  }
   
   return Math.min(...possibleAmounts);
   
@@ -677,23 +676,9 @@ I = [12, 15]; //result = [[2, 12], [3, 27], [5, 15]]
 Notes:
 
 It can happen that a sum is 0 if some numbers are negative!
+
+TODO: incomplete solution for now!
 */
-function factors(num)
-{
- var
-  n_factors = [],
-  i;
- 
- for (i = 1; i <= Math.floor(Math.sqrt(num)); i += 1)
-  if (num % i === 0)
-  {
-   n_factors.push(i);
-   if (num / i !== i)
-    n_factors.push(num / i);
-  }
- n_factors.sort(function(a, b){return a - b;});  // numeric sort
- return n_factors;
-}
 
 function sumOfDivided(intArr=[12, 15]) {
   
@@ -714,7 +699,6 @@ function sumOfDivided(intArr=[12, 15]) {
   			}
   		}
   		
-  		
   	}
   	
   	return factors;
@@ -727,17 +711,13 @@ function sumOfDivided(intArr=[12, 15]) {
   	allFactors = findFactors(intArr[i]);
   	
   	// check which factors are primes
+  	// FIXME: condition expression
   	if(true) {
   		result.push([fac, intArr[i]]);
   	}
   	
   }
   
-  
-  
-  
-  return result;
-  
-  //return [[2, 12]];
+  return result; // in form [[2, 12]];
 }
  
