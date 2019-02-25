@@ -70,7 +70,9 @@ Write a function dirReduc which will take an array of strings and returns an arr
 with the needless directions removed (W<->E or S<->N side by side).
 
 */
-function dirReduc(arr){
+
+// solution for a minimal path:
+function dirReducMinimal(arr){
  
     let result = arr.reduce(function(accumulator, currentValue) {
     
@@ -112,6 +114,33 @@ function dirReduc(arr){
     return result;
 }
 
+// actual solution (in progress)
+function dirReduc(arr){
+ 
+    const complements = {
+        'NORTH' : 'SOUTH',
+        'SOUTH' : 'NORTH',
+        'EAST'  : 'WEST',
+        'WEST'  : 'EAST'
+    }
+    
+    let result = arr.reduce(function(accumulator, currentValue) {
+        
+        let previous = accumulator.slice(-1)[0];
+        
+        if(previous && (complements[currentValue] === previous)) {
+            accumulator.pop();
+        } else {
+            accumulator.push(currentValue);
+        }
+
+        return accumulator;
+        
+    }, []);
+    
+    
+    return result;
+}
 dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]); //["WEST"]
 dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH"]);// => []
 dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]);// ["WEST"]
