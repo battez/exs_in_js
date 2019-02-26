@@ -194,11 +194,14 @@ function mix(s1, s2) {
   
   console.log('used',lettersUsed);
   for (let key of lettersUsed) {
-      
+          
+      // - funnel answers into array of arrays, where index of the outer array is the no. letters of that solution
+      // - then we can sort outer array descendingly
+      // - and inners ascendingly, lexically.
   }
 
-  
-  // return result.join('/')
+  // finally return and join:
+  return result.map(elm => elm.join('/')).join('/');
 }
 
 
