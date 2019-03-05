@@ -162,12 +162,10 @@ function mix(s1, s2) {
   if(arguments.length !== 2) {
       return '';
   }
-  
-  let result = [];
    
   let counts = [new Map(), new Map()];
   
-  // keep track of any letters used
+  // keep track of any letters used, this is handy to return result of just those > 1
   let lettersUsed = new Set();
   
   for (let i = 0; i < counts.length; i++) {
@@ -180,7 +178,7 @@ function mix(s1, s2) {
 
               counts[i].set(chr, 1 + counts[i].get(chr) || 1);
               
-              // we only want any max's 2 or more
+              // we only want to return any of 2 or more, so we keep a note of these
               if(counts[i].get(chr) === 2) {
                   lettersUsed.add(chr);
               }
@@ -190,38 +188,65 @@ function mix(s1, s2) {
       
   }
   
-  console.log(counts);
+  //   console.log('letters used', lettersUsed);
   
-  console.log('used',lettersUsed);
-  for (let key of lettersUsed) {
+  // initialise our result array to correct size
+  let result = [];
+
+  for (let letter of lettersUsed) {
+      
+      // - funnel answers into array of arrays, where index of
+      let answer = '';
+      const s1count = counts[0].get(letter) || 0;
+      const s2count = counts[1].get(letter) || 0;
+      
+      // the outer array is the no. letters of that solution
+      if (s1count === s2count) {
+          answer = '=:' + letter.repeat(s1count);
           
-      // - funnel answers into array of arrays, where index of the outer array is the no. letters of that solution
-      // - then we can sort outer array descendingly
-      // - and inners ascendingly, lexically.
+      } else if (s1count > s2count) {
+          answer = '1:' + letter.repeat(s1count);
+      } else {
+          answer = '2:' + letter.repeat(s2count);
+      }
+      //   console.log('answer',answer);
+      
+      // initialise to array if necessary:
+      result[answer.length] = result[answer.length] || [];
+      result[answer.length].push(answer);
+      
+   
   }
-
+  
+  // this is the final result we will return:
+  let final = [];
+  
+  // then we sort inners ascendingly, lexically.
+  // (...and in final return outer array descendingly)
+  for (let i = 0; i < result.length; i++) {
+    
+    // we do not want the undefined elements
+    if(result[i] !== undefined) {
+        final.push(result[i].sort().join('/'));
+    }
+    
+  }
+  
   // finally return and join:
-  return result.map(elm => elm.join('/')).join('/');
+  if (!final.length) {
+      return '';
+  } else {
+      //
+      return final.reverse().join('/');
+  }
+  
 }
-
-
 
 //tests
 mix("codewars", "codewars"); // ""
 mix("Lords of the Fallen", "gamekult");// "1:ee/1:ll/1:oo")
-/*mix("Are they here", "yes, they are here");// "2:eeeee/2:yy/=:hh/=:rr"
-mix("looping is fun but dangerous", "less dangerous than coding");// "1:ooo/1:uuu/2:sss/=:nnn/1:ii/2:aa/2:dd/2:ee/=:gg")
-mix(" In many languages", " there's a pair of functions");// "1:aaa/1:nnn/1:gg/2:ee/2:ff/2:ii/2:oo/2:rr/2:ss/2:tt")
-s1 = "my&friend&Paul has heavy hats! &"
-s2 = "my friend John has many many friends &"
-mix(s1, s2);//"2:nnnnn/1:aaaa/1:hhh/2:mmm/2:yyy/2:dd/2:ff/2:ii/2:rr/=:ee/=:ss"
+mix("Are they here", "yes, they are here");// "2:eeeee/2:yy/=:hh/=:rr"
+mix("looping is fun but dangerous", "less dangerous than coding");// "1:ooo/1:uuu/2:sss/=:nnn/1:ii/2:aa/2:dd/2:ee/=:gg"
 
-s1 = "mmmmm m nnnnn y&friend&Paul has heavy hats! &"
-s2 = "my frie n d Joh n has ma n y ma n y frie n ds n&"
-mix(s1, s2);//"1:mmmmmm/=:nnnnnn/1:aaaa/1:hhh/2:yyy/2:dd/2:ff/2:ii/2:rr/=:ee/=:ss"
-
-s1="Are the kids at home? aaaaa fffff"
-s2="Yes they are here! aaaaa fffff"
-mix(s1, s2);// "=:aaaaaa/2:eeeee/=:fffff/1:tt/2:rr/=:hh"*/
 
 
