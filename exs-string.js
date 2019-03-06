@@ -250,3 +250,43 @@ mix("looping is fun but dangerous", "less dangerous than coding");// "1:ooo/1:uu
 
 
 
+// The total number of permutation of a string formed by n characters (all distinct) is n!
+/* Middle Permutation
+Task
+You are given a string s. Every letter in s appears once.
+
+Consider all strings formed by rearranging the letters in s. After ordering these strings in dictionary order, return the middle term. (If the sequence has a even length n, define its middle term to be the (n/2)th term.)
+
+Example
+For s = "abc", the result should be "bac". The permutations in order are: "abc", "acb", "bac", "bca", "cab", "cba" So, The middle term is "bac".
+
+Input/Output
+[input] string s
+
+unique letters (2 <= length <= 26)
+
+[output] a string
+
+middle permutation.
+*/
+function middlePermutation(s) {
+    
+    let result;
+    
+    function findFactorial(n) {
+        if (n === 1) {
+            return n;
+        } else {
+            return n * findFactorial(n-1);
+        }
+        
+    }
+    
+    let permutations = findFactorial(s.length);
+    permutations = Math.ceil(permutations / 2);
+    
+    // Todo: figure out way to quickly get this permutation itself...
+    // might just naively have to loop through
+    result = permutations;
+    return result;
+}
